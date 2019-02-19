@@ -1,5 +1,7 @@
 <?php
 
+use Elementor\Modules\DynamicTags\Module as TagsModule;
+
 class Control_MyFileUploader extends \Elementor\Base_Data_Control
 {
 
@@ -36,7 +38,8 @@ class Control_MyFileUploader extends \Elementor\Base_Data_Control
         // Styles
 
         // Scripts
-        wp_enqueue_script( 'elementor-file-uploader', EFU_DIR_URL . '/assets/js/scripts.js', [ 'jquery' ], '1.0' );
+        $class_name = get_class( $this );
+        wp_enqueue_script( 'elementor-file-uploader', EFU_DIR_URL . "/inc/controls/$class_name/$class_name.js", [ 'jquery' ], '1.0' );
     }
 
     /**
