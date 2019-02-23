@@ -109,36 +109,3 @@ jQuery( window ).on( 'elementor:init', function () {
     } );
     elementor.addControlView( 'file_uploader', Controlfile_uploader );
 } );
-function pmw_media_uploader()
-{
-    media_uploader = wp.media( {
-        frame: "post",
-        state: "insert",
-        multiple: false
-    } );
-
-    media_uploader.on( "insert", function () {
-        var json = media_uploader.state().get( "selection" ).first().toJSON();
-        var image_url = json.url;
-        if ( formfield )
-        {
-            if ( formtype === "image" )
-            {
-                $( '#' + formfield + " .file-value" ).val( json.id );
-                $( '#' + formfield + " .pmw-image-preview" ).attr( 'src', image_url );
-            }
-            if ( formtype === "file" )
-            {
-                $( '#' + formfield + " .file-value" ).val( json.id );
-                $( '#' + formfield + " .pmw-file-preview" ).html( '<p>' + 'نام  فایل : ' + json.filename + '<br> حجم : ' + json.filesizeHumanReadable + '</p>' );
-            }
-            if ( !$( '#' + formfield ).find( ".pmw-remove-upload-button" ).length )
-            {
-                var big_image_upload = $( '#' + formfield );
-                var remove_text = (big_image_upload.attr( "upload-type" ) === "image") ? "حذف تصویر" : "حذف فایل";
-                $( '<input type="button" class="basic ui button pmw-remove-upload-button" upload-type="' + big_image_upload.attr( "upload-type" ) + '" value="' + remove_text + '">' ).insertAfter( big_image_upload.find( ".pmw-upload-button" ) );
-            }
-        }
-    } );
-    media_uploader.open();
-}

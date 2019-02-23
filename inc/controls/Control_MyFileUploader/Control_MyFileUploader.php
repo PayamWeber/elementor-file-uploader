@@ -1,7 +1,5 @@
 <?php
 
-use Elementor\Modules\DynamicTags\Module as TagsModule;
-
 class Control_MyFileUploader extends \Elementor\Base_Data_Control
 {
 
