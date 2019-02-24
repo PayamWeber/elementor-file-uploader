@@ -39,6 +39,22 @@ class ElementorFileUploader
      */
     private static $controls_path = '/inc/controls';
 
+    /**
+     * this property is the extra mime types that makes us upload everything that we want
+     * @var array
+     */
+    public static $extra_mime_types = [
+        'image/svg' => 'svg',
+        'image/svg+xml' => 'svg',
+        'application/x-rar-compressed' => 'rar',
+        'application/octet-stream' => [ 'rar', 'zip' ],
+        'application/x-rar' => [ 'rar', 'zip' ],
+        'application/zip' => 'zip',
+        'application/x-zip-compressed' => 'zip',
+        'multipart/x-zip' => 'zip',
+        'application/x-compressed' => 'zip',
+    ];
+
     private function __construct() { }
 
     /**
@@ -56,8 +72,8 @@ class ElementorFileUploader
             // Register controls
             add_action( 'elementor/controls/controls_registered', [ self::$instance, 'load_controls' ] );
 
-            // Add mime types
-            add_filter( 'upload_mimes', [ self::$instance, 'upload_mime_types' ] );
+            // Add multiple mime types for a single ext
+            add_filter( 'wp_check_filetype_and_ext', [ self::$instance, 'upload_mime_types' ], 99, 3 );
         }
     }
 
@@ -138,15 +154,33 @@ class ElementorFileUploader
     /**
      * add custom file mime types for upload
      *
-     * @param array $mimes
+     * @param $check
+     * @param $file
+     * @param $filename
      *
      * @return array
      */
-    public function upload_mime_types( $mimes = [] )
+    public function upload_mime_types( $check, $file, $filename )
     {
-        $mimes[ 'zip' ] = "application/zip";
+        if ( empty( $check[ 'ext' ] ) && empty( $check[ 'type' ] ) )
+        {
+            /**
+             * filter extra mime types for elementor file uploader plugin
+             */
+            $extra_mime_types = apply_filters( 'efu_mime_types', self::$extra_mime_types );
+            $real_mime_type = mime_content_type( $file );
 
-        return $mimes;
+            if ( isset( $extra_mime_types[$real_mime_type] ) )
+            {
+                $ext = end( explode( '.', $filename ) );
+                return [
+                    'type' => $real_mime_type,
+                    'ext' => $ext,
+                    'proper_filename' => $filename
+                ];
+            }
+        }
+        return $check;
     }
 }
 
