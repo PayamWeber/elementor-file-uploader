@@ -89,4 +89,18 @@ class Control_MyFileUploader extends \Elementor\Base_Data_Control
         return [];
     }
 
+    /**
+     * this method will return the default value of this control
+     * @return array|string
+     */
+    public function get_default_value()
+    {
+        return [
+            'id' => '',
+            'url' => '',
+            'size' => '',
+            'name' => '',
+        ];
+    }
+
 }
