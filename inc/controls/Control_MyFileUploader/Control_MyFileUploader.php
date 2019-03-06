@@ -86,11 +86,19 @@ class Control_MyFileUploader extends \Elementor\Base_Data_Control
      */
     protected function get_default_settings()
     {
-        return [];
+        return [
+            'default' => [
+                'id' => '',
+                'url' => '',
+                'size' => '',
+                'name' => '',
+            ],
+        ];
     }
 
     /**
      * this method will return the default value of this control
+     *
      * @return array|string
      */
     public function get_default_value()
@@ -103,4 +111,27 @@ class Control_MyFileUploader extends \Elementor\Base_Data_Control
         ];
     }
 
+    /**
+     * Get data control value.
+     *
+     * Retrieve the value of the data control from a specific Controls_Stack settings.
+     *
+     * @since  1.5.0
+     * @access public
+     *
+     * @param array $control  Control
+     * @param array $settings Element settings
+     *
+     * @return mixed Control values.
+     */
+    public function get_value( $control, $settings )
+    {
+        $value = parent::get_value( $control, $settings );
+
+        if ( isset( $value[ 'url' ] ) && is_array( $value[ 'url' ] ) )
+        {
+            return $this->get_default_value();
+        }
+        return $value;
+    }
 }
