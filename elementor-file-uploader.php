@@ -112,7 +112,8 @@ class ElementorFileUploader
                     $this->register_controls( $dir . '/' . $file );
                 } else if ( substr( $file, -4, 4 ) == '.php' )
                 {
-                    $first_name = reset( explode( '.', $file ) );
+					$first_name = explode( '.', $file );
+					$first_name = reset( $first_name );
                     if ( $first_name != 'index' && mb_substr( $dir, strlen( $dir ) - strlen( $first_name ), strlen( $first_name ) ) == $first_name )
                     {
                         include( $dir . '/' . $file );
