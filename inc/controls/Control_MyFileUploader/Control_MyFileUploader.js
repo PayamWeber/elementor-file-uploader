@@ -20,7 +20,7 @@ jQuery( window ).on( 'elementor:init', function () {
 
         applySavedValue: function applySavedValue() {
             var value = this.getControlValue();
-            if ( value && value.id )
+            if ( value && value.hasOwnProperty('id') && value.id && value.hasOwnProperty('name') && value.hasOwnProperty('url') )
             {
                 var filename_parts = value.name.split('.');
                 var image_types = [ 'jpg', 'jpeg', 'png', 'gif', 'svg' ];
