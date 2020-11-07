@@ -1,37 +1,36 @@
-## Welcome to GitHub Pages
+# elementor-file-uploader
+Elementor File Uploader Plugin
 
-You can use the [editor on GitHub](https://github.com/PayamWeber/elementor-file-uploader/edit/master/docs/index.md) to maintain and preview the content for your website in Markdown files.
+Hello and welcome to this useful plugin. If you are a wordpress developer, might had the issue that elementor does not support file uploader.
+At this moment problem has been solved and you can use this file uploader and enjoy your life.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Requirements
+###### PHP Version: 5.6 or later
 
-### Markdown
+##### Tested on:
+`Wordpress 5.0.3`,
+`Elementor 2.4.3`
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+## How to use
+For using this amazing control you just need to call it in controls method in your widget class
+```
+$this->add_control(
+    'example_name',
+    [
+        'label' => __( 'File Uploader' ),
+        'type' => 'file_uploader',
+    ]
+);
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Hooks
+```
+efu_mime_types
+```
+`type = filter`,
+`args = $types`
 
-### Jekyll Themes
+### About me
+I'm a PHP / Laravel / Wordpress Developer that like to make everything easier in this huge world of programming
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/PayamWeber/elementor-file-uploader/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+resume: [payamjafari.ir](http://payamjafari.ir)
