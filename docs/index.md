@@ -13,7 +13,7 @@ At this moment problem has been solved and you can use this file uploader and en
 
 ## How to use
 For using this amazing control you just need to call it in controls method in your widget class
-```
+```php
 $this->add_control(
     'example_name',
     [
